@@ -1,0 +1,58 @@
+h1 {
+  font-family: verdana,arial,sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  }
+  
+h2 {
+  font-family: verdana,arial,sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  }
+  
+.main {
+  font-family: verdana,arial,sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  }
+  
+  .main2 {
+  font-family: verdana,arial,sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  }
+  
+.sub {
+  font-family: verdana,arial,sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  }
+  
+  .style1 {
+  	font-family: Wingdings;
+	font-size: 13px;
+	}
+  
+p {
+  font-family: verdana,arial,helvetica,geneva,sans-serif;
+  font-size: 11px;
+  }
+
+.back {
+	background-color: #c8c8c8;
+	background-image: url(../images/bkgrd_image.jpg);
+	background-repeat: no-repeat;
+}
+body {
+	background-color: #c8c8c8;
+}
+
+.style1 {font-family: Wingdings}
+
+
+
+.style2 {font-size: 12px}
+
+
+.style3 {font-size: 14px}
+

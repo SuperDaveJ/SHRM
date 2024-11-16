@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>Untitled Document</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+
+<link href="../positionpages/css/shrm_style.css" rel="stylesheet" type="text/css" />
+
+
+<link href="css/shrm_style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<%
+Set cnn = Server.CreateObject("ADODB.Connection")
+cnn.open "PROVIDER=SQLOLEDB;DATA SOURCE=owbsr01;UID=root;PWD=shrm;DATABASE=SHRM_STATIC_INFO"
+%> 
+ 
+<%
+' Declare our variables... always good practice!
+Dim cnnSimple  ' ADO connection
+Dim rstSimple  ' ADO recordset
+Dim strQuery   ' ADO Query
+Dim strUserID
+Dim strUserName
+Dim strActionPlan
+Dim strDBPath  ' path to our Access database (*.mdb) file
+
+
+' MapPath of virtual database file path to a physical path.
+' If you want you could hard code a physical path here.
+strDBPath = Server.MapPath("db_scratch.mdb")
+
+
+' Create an ADO Connection to connect to the scratch database.
+' We're using OLE DB but you could just as easily use ODBC or a DSN.
+Set cnnSimple = Server.CreateObject("ADODB.Connection")
+
+' This line is for the Access sample database:
+'cnnSimple.Open "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & strDBPath & ";"
+
+' We're actually using SQL Server so we use this line instead:
+cnnSimple.Open "Provider=SQLOLEDB;Data Source=owbsr01;" _
+	& "Initial Catalog=SHRM_STATIC_INFO;User Id=root;Password=shrm;" _
+	& "Connect Timeout=15;Network Library=dbmssocn;"
+
+
+' Execute a query using the connection object.  It automatically
+' creates and returns a recordset which we store in our variable.
+strActionPlan = 0
+strActionPlan = request.QueryString("actionplan")
+strUserID = request.QueryString("code")
+strUserName = request.QueryString("name")
+if strUserID <>"" Then
+	strQuery = "SELECT * FROM tblUserData WHERE UserID='" & strUserID & "' AND UserLastName = '" & strUserName & "'"
+	Set rstSimple = cnnSimple.Execute(strQuery)
+end if
+
+' Display a table of the data in the recordset.  We loop through the
+' recordset displaying the fields from the table and using MoveNext
+' to increment to the next record.  We stop when we reach EOF.
+%>
+
+<body>
+<table width="770" height="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="76" valign="top"><img src="../positionpages/images/banner.jpg" width="770" height="75" /></td>
+  </tr>
+  <tr>
+    <td class="back" "valign="top" nowrap="nowrap" background="../positionpages/images/bkgrd_image.jpg"><br />
+    <!-- TemplateBeginEditable name="EditRegion3" -->
+    <table width="95%" height="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+      <tr>
+        <td valign="top"><h1>&nbsp;</h1>
+            <p></p>
+          <p></p>
+          <p></p>
+          <h2>&nbsp;</h2></td>
+      </tr>
+     </table>
+    <p align="left">&nbsp;</p>
+    <!-- TemplateEndEditable -->
+    <table width="78%" height="100%" border="1" align="center" cellpadding="4" cellspacing="0" bordercolor="#666666">
+      <tr>
+        <td valign="top"><p>The SHRM HR  Career Guide tool is intended to help SHRM members assess where they are in  their HR <br />
+          career, where they should realistically expect to head next, and how  SHRM can help them get there.&nbsp; <br />
+          No tool such as this can by itself  guarantee success for all users. But the SHRM HR Career Guide should <br />
+          be a  helpful resource for SHRM members as they navigate their career paths.</p>
+            <p>Copyright &copy; 2006, Society for Human Resource Management &bull; SHRM Privacy Statement</p></td>
+      </tr>
+    </table>
+    </td>
+  </tr>
+</table>
+
+<div align="center"></div>
+</body>
+</html>
